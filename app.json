@@ -1,0 +1,12 @@
+{
+  "name": "pj-allan-expo-test",
+  "displayName": "pj-allan-expo-test",
+  "expo": {
+    "name": "pj-allan-expo-test",
+    "slug": "pj-allan-expo-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
