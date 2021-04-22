@@ -1,15 +1,46 @@
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useRef } from "react";
+import {
+  Animated,
+  Button,
+  Image,
+  PanResponder,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import arrow from "./assets/arrow.png";
 import spinner from "./assets/spinner.png";
 
 export default function App() {
+  const rotateValue = useRef(new Animated.Value(0)).current;
+
+  const reset = () => {
+    Animated.spring(rotateValue, { toValue: 0, useNativeDriver: true }).start();
+  };
+
+  const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderMove: (event, gestureState) => {
+      rotateValue.setValue(gestureState.dy);
+    },
+  });
+
+  const rotationStyle = rotateValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "1deg"],
+  });
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>SPIN TO WIN</Text>
       <Image source={arrow} style={styles.arrow} />
-      <Image source={spinner} style={styles.spinner} />
+      <Animated.Image
+        source={spinner}
+        style={[styles.spinner, { transform: [{ rotate: rotationStyle }] }]}
+        {...panResponder.panHandlers}
+      />
+      <Button title={"Reset"} onPress={reset} />
     </View>
   );
 }
