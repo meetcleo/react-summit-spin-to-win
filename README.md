@@ -5,8 +5,8 @@ Install the Expo CLI
 $ npm install --global expo-cli
 
 Clone the project
-$ git clone https://github.com/meetcleo/pj-allan-expo-test
+$ git clone https://github.com/meetcleo/react-summit-spin-to-win
 
 Change into the project directory and run the web command
-$ cd pj-allan-expo-test && yarn web
+$ cd react-summit-spin-to-win && yarn && yarn web
 ```
