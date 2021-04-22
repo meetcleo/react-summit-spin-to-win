@@ -24,6 +24,13 @@ export default function App() {
     onPanResponderMove: (event, gestureState) => {
       rotateValue.setValue(gestureState.dy);
     },
+    onPanResponderRelease: (event, gestureState) => {
+      Animated.decay(rotateValue, {
+        velocity: gestureState.vy,
+        useNativeDriver: true,
+        deceleration: 0.9989,
+      }).start();
+    },
   });
 
   const rotationStyle = rotateValue.interpolate({
